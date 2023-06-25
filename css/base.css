@@ -1,0 +1,208 @@
+article, aside, audio, blockquote, body, button, dd, details, dl, dt, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, hr, input, legend, li, mark, menu, nav, ol, p, pre, section, summary, td, textarea, th, time, ul, video, xmp {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+html {
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
+
+body {
+    margin: 0 auto;
+    min-width: 1200px;
+    background-color: rgb(0,0,35);
+    color: #fff;
+    font: 12px/1 '微软雅黑', 'Microsoft YaHei', Arial, Verdana, Helvetica, sans-serif;
+    -webkit-text-size-adjust: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 400;
+}
+
+a, a:active, a:focus, a:hover, a:visited {
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    border: 0;
+    vertical-align: top;
+}
+
+a, img {
+    -webkit-touch-callout: none;
+}
+
+li, ol, ul {
+    list-style: none;
+}
+
+i {
+    font-style: normal;
+}
+
+button, input, select, textarea {
+    outline: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font: 12px/1.5 '微软雅黑', 'Microsoft YaHei', Arial, Verdana, Helvetica, sans-serif;
+    resize: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+input, textarea {
+    color: #fff;
+    font: 12px/1.5 '微软雅黑', 'Microsoft YaHei', Arial, Verdana, Helvetica, sans-serif;
+}
+
+input:-webkit-autofill, select:-webkit-autofill, textarea:-webkit-autofill {
+    box-shadow: inset 0 0 0 1000px #fff;
+}
+
+button, input[type=button] {
+    cursor: pointer;
+}
+
+.clearfix:after {
+    clear: both;
+    display: block;
+    overflow: hidden;
+    height: 0;
+    content: " ";
+}
+
+.clearfix {
+    zoom: 1;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.oe1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.oe2 {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.oe3 {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+
+.w1200 {
+    margin: 0 auto;
+    width: 1200px;
+}
+
+.flex-box {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.flex-direction-row {
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+}
+
+.flex-direction-column {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.flex-wrap-nowrap {
+    -webkit-flex-wrap: nowrap;
+    -moz-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    -o-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+}
+
+.flex-wrap-wrap {
+    -webkit-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    -o-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.flex-justify-center {
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    -o-justify-content: center;
+    justify-content: center;
+}
+
+.flex-justify-between {
+    -webkit-justify-content: space-between;
+    -moz-justify-content: space-between;
+    -ms-justify-content: space-between;
+    -o-justify-content: space-between;
+    justify-content: space-between;
+}
+
+.flex-justify-end {
+    -webkit-justify-content: flex-end;
+    -moz-justify-content: flex-end;
+    -ms-justify-content: flex-end;
+    -o-justify-content: flex-end;
+    justify-content: flex-end;
+}
+
+.flex-align-item-start {
+    -webkit-box-align: start;
+    -moz-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+}
+
+.flex-align-item-center {
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    -o-align-items: center;
+    align-items: center;
+}
+
+.flex1 {
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+    color: #939bae;
+}
+
+input:-moz-placeholder, textarea:-moz-placeholder {
+    color: #939bae;
+}
+
+input::-moz-placeholder, textarea::-moz-placeholder {
+    color: #939bae;
+}
+
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+    color: #939bae;
+}
