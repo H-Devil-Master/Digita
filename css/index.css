@@ -53,10 +53,16 @@ section { height: 966px; width: 1896px; margin: 0 auto; margin-top: 20px; }
 
 .panel-tab-header { height: 43px; width: 510px; margin: 0 auto; line-height: 43px; font-size: 15px; font-weight: bold; }
 
+.box-hover { cursor: pointer; }
+
+.box-hover:hover .box .box-t { display: block; }
+
+.box-t { position: absolute; width: 125px; height: 157px; background-color: #00408f; left: 123px; top: 41px; display: none; }
+.box-t div:first-child { margin-top: 10px; }
+.box-t div { height: 25px; line-height: 25px; display: block; padding-left: 10px; }
+.box-t div:hover { background-color: #006cf1; }
+
 .panel-tab { position: relative; }
-.panel-tab .box-t { position: absolute; width: 80px; height: 157px; background-color: #00408f; left: 145px; top: 41px; display: none; }
-.panel-tab .box-t div:first-child { margin-top: 10px; }
-.panel-tab .box-t div { height: 25px; display: block; padding-left: 10px; }
 .panel-tab table { font-size: 12px; width: 100%; border-collapse: collapse; border: 1px solid #1154c3; border-left: none; border-right: none; height: 264px; display: block; overflow: auto; }
 .panel-tab table tr:first-child { background-color: #132059; }
 .panel-tab table tr td { border: 1px solid #0d3577; height: 36px; padding-left: 10px; white-space: nowrap; /*隐藏溢出的内容*/ overflow: hidden; /*溢出的内容设置省略号*/ text-overflow: ellipsis; }
@@ -81,9 +87,9 @@ section { height: 966px; width: 1896px; margin: 0 auto; margin-top: 20px; }
 
 .middle-hover:hover { background-color: #006cf1; }
 
-.middle-hover { position: relative; }
+.middle-hover { cursor: pointer; position: relative; }
 .middle-hover:hover .middle-t { display: block; }
-.middle-hover .middle-t { display: none; width: 84px; height: 120px; background-color: #00408f; position: absolute; }
+.middle-hover .middle-t { display: none; z-index: 999; width: 84px; background-color: #00408f; position: absolute; }
 .middle-hover .middle-t a:first-child { margin-top: 10px; }
 .middle-hover .middle-t a { display: block; height: 26px; color: #ffffff; padding-left: 10px; line-height: 26px; }
 .middle-hover .middle-t a:hover { background-color: #0055bd; }
@@ -141,9 +147,10 @@ section { height: 966px; width: 1896px; margin: 0 auto; margin-top: 20px; }
 .main-footer-header a { display: block; height: 100%; line-height: 35px; text-align: center; font-weight: bold; font-size: 14px; width: 80px; margin-right: 2px; color: #ffffff; background-color: #001679; }
 .main-footer-header a:hover { background-color: #006cf1; }
 
-.main-footer-body { width: 513px; height: 350px; margin: 0 auto; margin-top: 12px; }
+.main-footer-body { width: 513px; height: 350px; position: relative; margin: 0 auto; margin-top: 12px; overflow-y: scroll; }
 .main-footer-body table { border-collapse: collapse; width: 100%; }
 .main-footer-body table tr:first-child { background-color: #132059; }
+.main-footer-body table tr { cursor: pointer; }
 .main-footer-body table tr .icon-box { display: flex; }
 .main-footer-body table tr .icon { width: 4px; height: 4px; background-color: #006cf1; margin-right: 10px; margin-top: 5px; }
 .main-footer-body table tr th { height: 32px; text-align: left; }
@@ -159,6 +166,13 @@ section { height: 966px; width: 1896px; margin: 0 auto; margin-top: 20px; }
 .g-box div:last-child { padding-top: 2px; }
 
 .price-header { margin-left: 0; }
+
+/*弹窗样式*/
+#popup { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #fff; border-radius: 5px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); z-index: 9999; display: none; }
+
+.popupContent { padding: 20px; background-color: #000229; }
+
+#closeBtn { display: block; margin-top: 20px; }
 
 /* 修改滚动条整体样式 */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
