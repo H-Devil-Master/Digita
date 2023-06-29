@@ -1,10 +1,39 @@
 $(document).ready(function() {
+    function timeconversion(data){
+        const timestamps = data; // 时间戳（以毫秒为单位）
+        const convertedDates = timestamps.map(timestamp => {
+            const date = new Date(timestamp*1000);
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            const hours = String(date.getHours()).padStart(2, '0');
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+            const seconds = String(date.getSeconds()).padStart(2, '0');
+
+            const formattedDate = `${year}-${month}-${day}`;
+            return formattedDate
+            // return date.toLocaleString(); // 如果需要自定义日期格式，可以使用其他方法来格式化
+        });
+    }
 /*第一个折线图*/
 (function (){
     axios.get('http://122.9.161.126:5001/supply/v2/steel_price_chart?steel_name=角钢')
         .then(function(res) {
             console.log(res)
+            const timestamps = res.data.data.quoted_date; // 时间戳（以毫秒为单位）
+            const convertedDates = timestamps.map(timestamp => {
+                const date = new Date(timestamp*1000);
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+                const hours = String(date.getHours()).padStart(2, '0');
+                const minutes = String(date.getMinutes()).padStart(2, '0');
+                const seconds = String(date.getSeconds()).padStart(2, '0');
 
+                const formattedDate = `${year}-${month}-${day}`;
+
+                return formattedDate; // 如果需要自定义日期格式，可以使用其他方法来格式化
+            })
             // 基于准备好的dom，初始化echarts实例
             var myChart = echarts.init(document.querySelector('.line1'));
 
@@ -35,7 +64,7 @@ $(document).ready(function() {
                     {
                         type: 'category',
                         boundaryGap: false,
-                        data: res.data.data.quoted_date,
+                        data: convertedDates,
                         axisLabel:{
                             textStyle:{
                                 color:'#ffffff',
@@ -124,6 +153,20 @@ $(document).ready(function() {
     axios.get('http://122.9.161.126:5001/supply/v2/steel_basis?steel_name=螺纹钢')
         .then(function(res) {
             console.log(res)
+            const timestamps = res.data.data.spot.quoted_date; // 时间戳（以毫秒为单位）
+            const convertedDates = timestamps.map(timestamp => {
+                const date = new Date(timestamp*1000);
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+                const hours = String(date.getHours()).padStart(2, '0');
+                const minutes = String(date.getMinutes()).padStart(2, '0');
+                const seconds = String(date.getSeconds()).padStart(2, '0');
+
+                const formattedDate = `${year}-${month}-${day}`;
+
+                return formattedDate; // 如果需要自定义日期格式，可以使用其他方法来格式化
+            })
             var myChart = echarts.init(document.querySelector('.line2'));
             option = {
                 title: {
@@ -181,7 +224,7 @@ $(document).ready(function() {
                 xAxis: {
                     type: 'category',
                     boundaryGap: false,
-                    data: res.data.data.spot.quoted_date,
+                    data: convertedDates,
                     axisLabel:{
                         textStyle:{
                             color:'#ffffff',
@@ -263,6 +306,20 @@ $(document).ready(function() {
         axios.get('http://122.9.161.126:5001/supply/v2/steel_many_chart?model_name=钢铁综合指数')
             .then(function(res) {
                 console.log(res)
+                const timestamps = res.data.data.quoted_date; // 时间戳（以毫秒为单位）
+                const convertedDates = timestamps.map(timestamp => {
+                    const date = new Date(timestamp*1000);
+                    const year = date.getFullYear();
+                    const month = String(date.getMonth() + 1).padStart(2, '0');
+                    const day = String(date.getDate()).padStart(2, '0');
+                    const hours = String(date.getHours()).padStart(2, '0');
+                    const minutes = String(date.getMinutes()).padStart(2, '0');
+                    const seconds = String(date.getSeconds()).padStart(2, '0');
+
+                    const formattedDate = `${year}-${month}-${day}`;
+
+                    return formattedDate; // 如果需要自定义日期格式，可以使用其他方法来格式化
+                })
                 var myChart = echarts.init(document.querySelector('.main-body-table'));
                 option = {
                     tooltip: {
@@ -297,7 +354,7 @@ $(document).ready(function() {
                     xAxis: {
                         type: 'category',
                         boundaryGap: false,
-                        data: res.data.data.quoted_date,
+                        data: convertedDates,
                         axisLabel:{
                             textStyle:{
                                 color:'#ffffff',
@@ -337,7 +394,28 @@ $(document).ready(function() {
                             // stack: 'Total',
                             symbol:'none',
                             smooth:true,
-                            data: res.data.data.price
+                            data: res.data.data.price,
+                            color:'rgb(1,253,22)',
+                            areaStyle: {
+                                color:new echarts.graphic.LinearGradient(
+                                    0,
+                                    0,
+                                    0,
+                                    1,
+                                    [
+                                        {
+                                            offset:0,
+                                            color: 'rgba(92,194,96,0.1)'
+
+                                        },
+                                        {
+                                            offset: 0.8,
+                                            color:'rgba(17,14,69,0.9)'
+                                        }
+                                    ],
+                                    false
+                                )
+                            },
                         },
                     ]
                 };
@@ -352,9 +430,23 @@ $(document).ready(function() {
     function showdata2() {
         axios.get('http://122.9.161.126:5001/supply/v2/steel_many_chart?model_name=钢铁进出口统计')
             .then(function (res) {
-                console.log(res)
+                console.log(res,"d换届大会讲课很就看看")
+                const timestamps = res.data.data.steel_in.quoted_date; // 时间戳（以毫秒为单位）
+                const convertedDates = timestamps.map(timestamp => {
+                    const date = new Date(timestamp*1000);
+                    const year = date.getFullYear();
+                    const month = String(date.getMonth() + 1).padStart(2, '0');
+                    const day = String(date.getDate()).padStart(2, '0');
+                    const hours = String(date.getHours()).padStart(2, '0');
+                    const minutes = String(date.getMinutes()).padStart(2, '0');
+                    const seconds = String(date.getSeconds()).padStart(2, '0');
+
+                    const formattedDate = `${year}-${month}-${day}`;
+
+                    return formattedDate; // 如果需要自定义日期格式，可以使用其他方法来格式化
+                })
                 var myChart = echarts.init(document.querySelector('.main-body-table'));
-                option = {
+                /*option = {
                     tooltip: {
                         trigger: 'axis',
                         backgroundColor: 'rgb(0,64,143)',
@@ -387,7 +479,7 @@ $(document).ready(function() {
                     xAxis: {
                         type: 'category',
                         boundaryGap: false,
-                        data: res.data.data.steel_in.quoted_date,
+                        data: convertedDates,
                         axisLabel: {
                             textStyle: {
                                 color: '#ffffff',
@@ -446,6 +538,120 @@ $(document).ready(function() {
                             data: res.data.data.steel_ku_cun.price
                         }
                     ]
+                };*/
+
+                option = {
+                    tooltip: {
+                        trigger: 'axis',
+                        backgroundColor: 'rgb(0,64,143)',
+                        borderColor: 'rgb(0,64,143)',
+                        axisPointer: {
+                            type: 'line',
+                            lineStyle: { // 将触发竖线的样式设置为实线，并将颜色修改为红色
+                                type: 'solid',
+                                color: 'rgb(0,64,143)'
+                            }
+                        },
+                        textStyle: { // 将 Tooltip 内容中字体的颜色设置为白色
+                            color: 'white'
+                        },
+                    },
+                    legend: {
+                        textStyle: {
+                            color: '#ffffff',
+                            paddingLeft: '10px',
+                            fontSize: '12px'
+                        }
+                    },
+                    xAxis: [
+                        {
+                            type: 'category',
+                            data: convertedDates,
+                            axisLabel: {
+                                textStyle: {
+                                    color: '#ffffff',
+                                    fontSize: 12
+                                }
+                            },
+                            axisLine: {
+                                lineStyle: {
+                                    color: "rgb(22,44,104)"
+                                }
+                            }
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            type: 'value',
+                            axisLabel: {
+                                textStyle: {
+                                    color: '#ffffff',
+                                    fontSize: 12
+                                }
+                            },
+                            axisLine: {
+                                lineStyle: {
+                                    color: "rgb(22,44,104)",
+                                }
+                            },
+                            splitLine: {
+                                lineStyle: {
+                                    color: "rgb(22,44,104)"
+                                }
+                            }
+                        },
+                        {
+                            axisLabel: {
+                                textStyle: {
+                                    color: '#ffffff',
+                                    fontSize: 12
+                                }
+                            },
+                            axisLine: {
+                                lineStyle: {
+                                    color: "rgb(22,44,104)",
+                                }
+                            },
+                            splitLine: {
+                                lineStyle: {
+                                    color: "rgb(22,44,104)"
+                                }
+                            }
+                        }
+                    ],
+                    series: [
+                        {
+                            name: '钢铁月度进口量',
+                            type: 'bar',
+                            tooltip: {
+                                valueFormatter: function (value) {
+                                    return value;
+                                }
+                            },
+                            data: res.data.data.steel_in.price
+                        },
+                        {
+                            name: '钢铁月度出口量',
+                            type: 'bar',
+                            tooltip: {
+                                valueFormatter: function (value) {
+                                    return value;
+                                }
+                            },
+                            data: res.data.data.steel_out.price
+                        },
+                        {
+                            name: '钢铁上游港口库存',
+                            type: 'line',
+                            yAxisIndex: 1,
+                            tooltip: {
+                                valueFormatter: function (value) {
+                                    return value;
+                                }
+                            },
+                            data: res.data.data.steel_ku_cun.price
+                        }
+                    ]
                 };
 
                 myChart.setOption(option,true);
@@ -459,6 +665,20 @@ $(document).ready(function() {
         axios.get('http://122.9.161.126:5001/supply/v2/steel_many_chart?model_name=黑色商品期货指数')
             .then(function(res) {
                 console.log(res)
+                const timestamps = res.data.data.焦炭.quoted_date; // 时间戳（以毫秒为单位）
+                const convertedDates = timestamps.map(timestamp => {
+                    const date = new Date(timestamp*1000);
+                    const year = date.getFullYear();
+                    const month = String(date.getMonth() + 1).padStart(2, '0');
+                    const day = String(date.getDate()).padStart(2, '0');
+                    const hours = String(date.getHours()).padStart(2, '0');
+                    const minutes = String(date.getMinutes()).padStart(2, '0');
+                    const seconds = String(date.getSeconds()).padStart(2, '0');
+
+                    const formattedDate = `${year}-${month}-${day}`;
+
+                    return formattedDate; // 如果需要自定义日期格式，可以使用其他方法来格式化
+                })
                 var myChart = echarts.init(document.querySelector('.main-body-table'));
                 option = {
                     tooltip: {
@@ -493,7 +713,7 @@ $(document).ready(function() {
                     xAxis: {
                         type: 'category',
                         boundaryGap: false,
-                        data: res.data.data.焦炭.quoted_date,
+                        data: convertedDates,
                         axisLabel:{
                             textStyle:{
                                 color:'#ffffff',
@@ -580,126 +800,7 @@ $(document).ready(function() {
 
 })();
 //走势图
-(function (){
 
-    var trendElements = document.querySelectorAll('.trend');
-    trendElements.forEach((item)=>{
-        const myChart = echarts.init(item);
-        const easingFuncs = {
-            elasticInOut: function (k) {
-                var s;
-                var a = 0.1;
-                var p = 0.4;
-                if (k === 0) {
-                    return 0;
-                }
-                if (k === 1) {
-                    return 1;
-                }
-                if (!a || a < 1) {
-                    a = 1;
-                    s = p / 4;
-                } else {
-                    s = (p * Math.asin(1 / a)) / (2 * Math.PI);
-                }
-                if ((k *= 2) < 1) {
-                    return (
-                        -0.5 *
-                        (a *
-                            Math.pow(2, 10 * (k -= 1)) *
-                            Math.sin(((k - s) * (2 * Math.PI)) / p))
-                    );
-                }
-                return (
-                    a *
-                    Math.pow(2, -10 * (k -= 1)) *
-                    Math.sin(((k - s) * (2 * Math.PI)) / p) *
-                    0.5 +
-                    1
-                );
-            },
-
-
-        };
-        const N_POINT = 30;
-        const grids = [];
-        const xAxes = [];
-        const yAxes = [];
-        const series = [];
-        const titles = [];
-        let count = 0;
-        Object.keys(easingFuncs).forEach(function (easingName) {
-            var easingFunc = easingFuncs[easingName];
-            var data = [];
-            for (var i = 0; i <= N_POINT; i++) {
-                var x = i / N_POINT;
-                var y = easingFunc(x);
-                data.push([x, y]);
-            }
-            grids.push({
-                show: true,
-                borderWidth: 0,
-                shadowColor: 'rgba(0, 0, 0, 0.3)',
-                shadowBlur: 2
-            });
-            xAxes.push({
-                type: 'value',
-                show: false,
-                min: 0,
-                max: 1,
-                gridIndex: count
-            });
-            yAxes.push({
-                type: 'value',
-                show: false,
-                min: -0.4,
-                max: 1.4,
-                gridIndex: count
-            });
-            series.push({
-                name: easingName,
-                type: 'line',
-                xAxisIndex: count,
-                yAxisIndex: count,
-                data: data,
-                showSymbol: false,
-                animationEasing: easingName,
-                animationDuration: 1000,
-                lineStyle:{
-                    color:'red'
-                },
-
-            });
-            titles.push({
-                textAlign: 'center',
-                text: easingName,
-                textStyle: {
-                    fontSize: 12,
-                    fontWeight: 'normal'
-                }
-            });
-            count++;
-        });
-        var rowNumber = Math.ceil(Math.sqrt(count));
-        grids.forEach(function (grid, idx) {
-            grid.left = ((idx % rowNumber) / rowNumber) * 100 + 0.5 + '%';
-            grid.top = (Math.floor(idx / rowNumber) / rowNumber) * 100 + 0.5 + '%';
-            grid.width = (1 / rowNumber) * 100 - 1 + '%';
-            grid.height = (1 / rowNumber) * 100 - 1 + '%';
-            titles[idx].left = parseFloat(grid.left) + parseFloat(grid.width) / 2 + '%';
-            titles[idx].top = parseFloat(grid.top) + '%';
-        });
-        option = {
-            grid: grids,
-            xAxis: xAxes,
-            yAxis: yAxes,
-            series: series
-        };
-        myChart.setOption(option);
-    })
-
-
-})();
 
 //地图
 (function (){
@@ -780,13 +881,233 @@ $(document).ready(function() {
                                     }
                                 }
                             },
+                            // 鼠标放上去的样式
+                            emphasis: {
+                                textStyle: {
+                                    color: "#fff",
+                                },
+                            },
                         },
                         itemStyle: {
-                            areaColor:'rgb(8,43,121)'
+                            areaColor:'rgb(8,43,121)',
+                            normal: {
+                                borderColor: "rgba(147, 235, 248, 1)",
+                                borderWidth: 1,
+                                areaColor: {
+                                    type: "radial",
+                                    x: 0.5,
+                                    y: 0.5,
+                                    r: 0.8,
+                                    colorStops: [
+                                        {
+                                            offset: 0,
+                                            color: "rgba(147, 235, 248, 0)", // 0% 处的颜色
+                                        },
+                                        {
+                                            offset: 1,
+                                            color: "rgba(147, 235, 248, .2)", // 100% 处的颜色
+                                        },
+                                    ],
+                                    globalCoord: false, // 缺省为 false
+                                },
+                                shadowColor: "rgba(128, 217, 248, 1)",
+                                shadowOffsetX: -2,
+                                shadowOffsetY: 2,
+                                shadowBlur: 10,
+                            },
+                            // 鼠标放上去高亮的样式
+                            emphasis: {
+                                // borderColor: "rgba(147, 235, 248, 1)",
+                                areaColor: "#389BB7",
+                                borderWidth: 0,
+                            },
                         }
                     },
                     series: [
-                        {
+                {
+                  type: "effectScatter",
+                  coordinateSystem: "geo",
+                  effectType: "ripple",
+                  showEffectOn: "render",
+                  rippleEffect: {
+                    period: 5,
+                    scale: 5,
+                    brushType: "fill",
+                  },
+
+                  hoverAnimation: true,
+                  itemStyle: {
+                    normal: {
+                      color: "rgba(255, 235, 59, .7)",
+                      shadowBlur: 10,
+                      shadowColor: "#333",
+                    },
+                  },
+                  zlevel: 1,
+                  data: [{
+                      name: '北京',
+                      value: [
+                          116.46,
+                          39.92,
+                          6210
+                      ]
+                  },
+                      {
+                          name: '天津',
+                          value: [
+                              117.209528,
+                              39.091775,
+                              6120
+                          ]
+                      },
+                      {
+                          name: '上海',
+                          value: [
+                              121.480827,31.23667,5966
+                          ]
+                      },
+                      {
+                          name: '重庆',
+                          value: [
+                              106.558724,29.567739,5875
+                          ]
+                      },
+                      {
+                          name: '河北',
+                          value: [
+                              114.517334,38.048429,6123
+                          ]
+                      },
+                      {
+                          name: '河南',
+                          value: [
+                              113.645834,34.806102,5671
+                          ]
+                      },
+                      {
+                          name: '云南',
+                          value: [
+                              99.936946,25.078655,6176
+                          ]
+                      },
+                      {
+                          name: '辽宁',
+                          value: [
+                              123.460603,41.683271,5756
+                          ]
+                      },
+                      {
+                          name: '黑龙江',
+                          value: [
+                              126.870589,46.974422,5869
+                          ]
+                      },
+                      {
+                          name: '湖南',
+                          value: [
+                              111.269681,28.901455,5968
+                          ]
+                      },
+                      {
+                          name: '安徽',
+                          value: [
+                              116.715281,30.825642,5922
+                          ]
+                      },
+                      {
+                          name: '山东',
+                          value: 5412
+                      },
+                      {
+                          name: '新疆',
+                          value: 6100
+                      },
+                      {
+                          name: '江苏',
+                          value: 31
+                      },
+                      {
+                          name: '浙江',
+                          value: 104
+                      },
+                      {
+                          name: '江西',
+                          value: 36
+                      },
+                      {
+                          name: '湖北',
+                          value: 1052
+                      },
+                      {
+                          name: '广西',
+                          value: 33
+                      },
+                      {
+                          name: '甘肃',
+                          value: 7
+                      },
+                      {
+                          name: '山西',
+                          value: 9
+                      },
+                      {
+                          name: '内蒙古',
+                          value: 7
+                      },
+                      {
+                          name: '陕西',
+                          value: 22
+                      },
+                      {
+                          name: '吉林',
+                          value: 4
+                      },
+                      {
+                          name: '福建',
+                          value: 18
+                      },
+                      {
+                          name: '贵州',
+                          value: 5
+                      },
+                      {
+                          name: '广东',
+                          value: 98
+                      },
+                      {
+                          name: '青海',
+                          value: 1
+                      },
+                      {
+                          name: '西藏',
+                          value: 0
+                      },
+                      {
+                          name: '四川',
+                          value: 44
+                      },
+                      {
+                          name: '宁夏',
+                          value: 4
+                      },
+                      {
+                          name: '海南',
+                          value: 22
+                      },
+                      {
+                          name: '台湾',
+                          value: 3
+                      },
+                      {
+                          name: '香港',
+                          value: 5
+                      },
+                      {
+                          name: '澳门',
+                          value: 5
+                      }],
+                },
+                        /*{
                             name: '散点',
                             type: 'effectScatter',
                             coordinateSystem: 'geo',
@@ -967,11 +1288,55 @@ $(document).ready(function() {
                                 shadowBlur: 10,
                                 shadowColor: '#333'
                             }
-                        }
+                        }*/
                     ]
                 };
                 // 设置图表配置项并绘制图表
                 myChart.setOption(option);
+                var data = [
+                    {name: '北京', value: 0},
+                    {name: '天津', value: 0},
+                    {name: '上海', value: 0},
+                    {name: '重庆', value: 0},
+                    {name: '河北', value: 0},
+                    {name: '河南', value: 0},
+                    {name: '云南', value: 0},
+                    {name: '辽宁', value: 0},
+                    {name: '黑龙江', value: 0},
+                    {name: '湖南', value: 0},
+                    {name: '安徽', value: 0},
+                    {name: '山东', value: 0},
+                    {name: '新疆', value: 0},
+                    {name: '江苏', value: 0},
+                    {name: '浙江', value: 0},
+                    {name: '江西', value: 0},
+                    {name: '湖北', value: 0},
+                    {name: '广西', value: 0},
+                    {name: '甘肃', value: 0},
+                    {name: '山西', value: 0},
+                    {name: '内蒙古', value: 0},
+                    {name: '陕西', value: 0},
+                    {name: '吉林', value: 0},
+                    {name: '福建', value: 0},
+                    {name: '贵州', value: 0},
+                    {name: '广东', value: 0},
+                    {name: '青海', value: 0},
+                    {name: '西藏', value: 0},
+                    {name: '四川', value: 0},
+                    {name: '宁夏', value: 0},
+                    {name: '海南', value: 0},
+                    {name: '台湾', value: 0},
+                    {name: '香港', value: 0},
+                    {name: '澳门', value: 0}
+                ]
+                myChart.on("click", (params) => {
+                    console.log(params)
+                    data.forEach((item) => {
+                        if (params.name == item.name) {
+                            console.log("a")
+                        }
+                    })
+                });
             });
         })
         .catch(function(error) {
