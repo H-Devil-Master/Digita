@@ -148,7 +148,7 @@ section { height: 966px; width: 1896px; margin: 0 auto; margin-top: 20px; }
 .main-footer-header a:hover { background-color: #006cf1; }
 
 .main-footer-body { width: 513px; height: 350px; position: relative; margin: 0 auto; margin-top: 12px; overflow-y: scroll; }
-.main-footer-body table { border-collapse: collapse; width: 100%; }
+.main-footer-body table { border-collapse: collapse; width: 100%; table-layout: fixed; }
 .main-footer-body table tr:first-child { background-color: #132059; }
 .main-footer-body table tr { cursor: pointer; }
 .main-footer-body table tr .icon-box { display: flex; }
@@ -156,9 +156,10 @@ section { height: 966px; width: 1896px; margin: 0 auto; margin-top: 20px; }
 .main-footer-body table tr th { height: 32px; text-align: left; }
 .main-footer-body table tr th .box-b { display: flex; width: 70px; justify-content: space-between; align-items: center; }
 .main-footer-body table tr th .box-b img { padding-right: 10px; padding-top: 5px; }
-.main-footer-body table tr th:nth-child(1) { width: 330px; padding-left: 10px; }
+.main-footer-body table tr th:nth-child(1) { width: 300px; padding-left: 10px; }
 .main-footer-body table tr th:nth-child(2) { width: 105px; }
 .main-footer-body table tr td { height: 38px; border-bottom: 1px solid #0d3577; }
+.main-footer-body table tr td .text-box { width: 286px; white-space: nowrap; /*隐藏溢出的内容*/ overflow: hidden; /*溢出的内容设置省略号*/ text-overflow: ellipsis; }
 .main-footer-body table tr:last-child td { border-bottom: none; }
 
 .g-box { display: flex; }
@@ -168,7 +169,9 @@ section { height: 966px; width: 1896px; margin: 0 auto; margin-top: 20px; }
 .price-header { margin-left: 0; }
 
 /*弹窗样式*/
-#popup { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #fff; border-radius: 5px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); z-index: 9999; clip-path: polygon(0 10%, 10% 0, 90% 0, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0 90%); display: none; }
+#popup { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #fff; border-radius: 5px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); z-index: 9999; display: none; border: 1px solid #2369d1; }
+#popup::before { position: absolute; top: 0; left: 0; width: 20px; height: 10px; border-left: 3px solid #2c82ff; border-top: 3px solid #2c82ff; content: ''; }
+#popup::after { position: absolute; top: 0; right: 0; width: 20px; height: 10px; border-right: 3px solid #2c82ff; border-top: 3px solid #2c82ff; content: ''; }
 
 .popupContent { padding: 20px; background-color: #051333; }
 

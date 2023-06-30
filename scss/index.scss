@@ -683,7 +683,7 @@ section {
     table {
         border-collapse: collapse;
         width: 100%;
-
+        table-layout: fixed;
         & tr:first-child {
             background-color: rgb(19, 32, 89);
         }
@@ -720,7 +720,7 @@ section {
             }
 
             & th:nth-child(1) {
-                width: 330px;
+                width: 300px;
                 padding-left: 10px;
             }
 
@@ -731,6 +731,14 @@ section {
             td {
                 height: 38px;
                 border-bottom: 1px solid rgb(13, 53, 119);
+                .text-box{
+                    width: 286px;
+                    white-space: nowrap;
+                    /*隐藏溢出的内容*/
+                    overflow: hidden;
+                    /*溢出的内容设置省略号*/
+                    text-overflow: ellipsis;
+                }
             }
         }
 
@@ -768,8 +776,31 @@ section {
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     z-index: 9999;
-    clip-path: polygon(0 10%, 10% 0, 90% 0, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0 90%);
+    //clip-path: polygon(0 10%, 10% 0, 90% 0, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0 90%);
     display: none;
+    border: 1px solid rgb(35,105,209);
+    &::before{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        height: 10px;
+        border-left: 3px solid rgb(44,130,255);
+        border-top: 3px solid rgb(44,130,255);
+        content: '';
+        //transform: rotate(45deg);
+    }
+    &::after{
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 20px;
+        height: 10px;
+        border-right: 3px solid rgb(44,130,255);
+        border-top: 3px solid rgb(44,130,255);
+        content: '';
+        //transform: rotate(45deg);
+    }
 }
 .popupContent {
     padding: 20px;

@@ -71,15 +71,21 @@ $(document).ready(function() {
                 console.log(res)
                 $.each(res.data.data, function(index, value) {
                     var $newRow = $('<tr class="asj">');
-                    var $nameCell = $('<td class="openBtn">').append(
+                    /*var $nameCell = $('<td class="openBtn">').append(
                         $('<div>').addClass('icon-box').append(
                             $('<div>').addClass('icon')
                         ).append(value.title)
+                    );*/
+                    var $nameCell = $('<td>').addClass('openBtn').append(
+                        $('<div>').addClass('icon-box').append(
+                            $('<div>').addClass('icon'),
+                            $('<div>').addClass('text-box').text(value.title)
+                        )
                     );
                     $nameCell.attr('data-index', index);
                     $newRow.append($nameCell);
                     $newRow.append($('<td>').text("重庆"));
-                    $newRow.append($('<td>').text(value.quoted_date));
+                    $newRow.append($('<td>').text(timeconversion(value.quoted_date)));
                     $('#mainFooter').append($newRow);
 
                     $(document).on('click', '.openBtn', function() {
